@@ -1,0 +1,326 @@
+﻿@model IEnumerable<Joyeriaoro.Models.Producto>
+
+@{
+    ViewData["Title"] = "Lista de Productos";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+    body {
+        background: #f4f7fb;
+    }
+
+    .page-title {
+        font-weight: 700;
+        color: #111827;
+    }
+
+    .main-card {
+        border: none;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    .card-header-custom {
+        background: linear-gradient(135deg,#111827,#1e40af);
+        color: white;
+        padding: 25px;
+    }
+
+    .search-box {
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+        .search-box .form-control {
+            border: none;
+            padding: 14px;
+        }
+
+        .search-box .btn {
+            padding-left: 25px;
+            padding-right: 25px;
+            font-weight: 600;
+        }
+
+    .product-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 14px;
+        border: 2px solid #e5e7eb;
+    }
+
+    .empty-img {
+        width: 80px;
+        height: 80px;
+        background: #e5e7eb;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        font-size: 30px;
+    }
+
+    .table thead {
+        background: #111827;
+        color: white;
+    }
+
+    .table tbody tr {
+        transition: 0.2s;
+    }
+
+        .table tbody tr:hover {
+            background: #f9fafb;
+            transform: scale(1.002);
+        }
+
+    .btn-action {
+        border-radius: 10px;
+        padding: 7px 12px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .price {
+        color: #198754;
+        font-weight: 700;
+    }
+
+    .stock-badge {
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+    }
+
+</style>
+
+<div class="container-fluid mt-4">
+
+    <!-- TITULO -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h1 class="page-title">
+                <i class="bi bi-gem"></i>
+                Lista de Productos
+            </h1>
+
+            <p class="text-muted">
+                Administración de productos de Joyeria Oro
+            </p>
+
+        </div>
+
+        <div>
+
+            <a asp-action="Create"
+                   class="btn btn-success rounded-pill px-4 py-2 fw-bold">
+
+                <i class="bi bi-plus-circle-fill"></i>
+                Nuevo Producto
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- BUSCADOR -->
+    <form method="get"
+          asp-action="Index"
+          class="mb-4">
+
+        <div class="input-group search-box">
+
+            <span class="input-group-text bg-white border-0">
+
+                <i class="bi bi-search"></i>
+
+            </span>
+
+            <input type="text"
+                   name="buscar"
+                   class="form-control"
+                   placeholder="Buscar producto..." />
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Buscar
+
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- TABLA -->
+    <div class="card main-card">
+
+        <div class="card-header-custom">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <h3 class="fw-bold mb-1">
+                        Productos Registrados
+                    </h3>
+
+                    <p class="mb-0">
+                        Total productos: @Model.Count()
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <i class="bi bi-box-seam-fill"
+                           style="font-size:60px; opacity:0.2;">
+                    </i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead>
+
+                        <tr>
+
+                            <th class="p-3">Imagen</th>
+                            <th class="p-3">Nombre</th>
+                            <th class="p-3">Precio</th>
+                            <th class="p-3">Stock</th>
+                            <th class="p-3 text-center">Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <!-- IMAGEN -->
+                                <td class="p-3">
+
+                                    @if (!string.IsNullOrEmpty(item.ImagenUrl))
+                                    {
+                                        <img src="@Url.Content("~/imagenes/productos/" + item.ImagenUrl)"
+                                             class="product-img" />
+                                    }
+                                    else
+                                    {
+                                        <div class="empty-img">
+
+                                            <i class="bi bi-image"></i>
+
+                                        </div>
+                                    }
+
+                                </td>
+
+                                <!-- NOMBRE -->
+                                <td class="fw-semibold p-3">
+
+                                    @item.Nombre
+
+                                </td>
+
+                                <!-- PRECIO -->
+                                <td class="price p-3">
+
+                                    @((item.Precio ?? 0).ToString("C"))
+
+                                </td>
+
+                                <!-- STOCK -->
+                                <td class="p-3">
+
+                                    @{
+                                        int stock = item.Stock ?? 0;
+
+                                        if (stock == 0)
+                                        {
+                                            <span class="badge bg-danger stock-badge">
+                                                Agotado
+                                            </span>
+                                        }
+                                        else if (stock <= 5)
+                                        {
+                                            <span class="badge bg-warning text-dark stock-badge">
+                                                Bajo
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-success stock-badge">
+                                                Disponible
+                                            </span>
+                                        }
+                                    }
+
+                                </td>
+
+                                <!-- ACCIONES -->
+                                <td class="text-center p-3">
+
+                                    <a asp-action="Edit"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-primary btn-action">
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                    </a>
+
+                                    <a asp-action="Details"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-dark btn-action">
+
+                                        <i class="bi bi-eye-fill"></i>
+
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-danger btn-action">
+
+                                        <i class="bi bi-trash-fill"></i>
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
