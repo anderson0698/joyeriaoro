@@ -1,0 +1,273 @@
+﻿@model Joyeriaoro.Models.Producto
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+    body {
+        background: #f4f7fb;
+    }
+
+    .details-card {
+        border: none;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .details-header {
+        background: linear-gradient(135deg,#111827,#1e3a8a);
+        color: white;
+        padding: 30px;
+    }
+
+    .product-image {
+        width: 100%;
+        max-width: 300px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 20px;
+        border: 3px solid #e5e7eb;
+    }
+
+    .empty-image {
+        width: 300px;
+        height: 300px;
+        background: #e5e7eb;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 80px;
+        color: #9ca3af;
+    }
+
+    .info-box {
+        background: white;
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        margin-bottom: 15px;
+    }
+
+    .label-title {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .value-text {
+        font-size: 22px;
+        font-weight: 700;
+        color: #111827;
+    }
+
+    .price {
+        color: #198754;
+    }
+
+    .stock-badge {
+        padding: 10px 18px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+</style>
+
+<div class="container mt-5">
+
+    <div class="card details-card">
+
+        <!-- HEADER -->
+        <div class="details-header">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <h2 class="fw-bold">
+                        <i class="bi bi-box-seam-fill"></i>
+                        Detalles del Producto
+                    </h2>
+
+                    <p class="mb-0">
+                        Información completa del producto
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <i class="bi bi-gem"
+                           style="font-size:70px; opacity:0.2;">
+                    </i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BODY -->
+        <div class="card-body p-5">
+
+            <div class="row g-5">
+
+                <!-- IMAGEN -->
+                <div class="col-md-4 text-center">
+
+                    @if (!string.IsNullOrEmpty(Model.ImagenUrl))
+                    {
+                        <img src="@Url.Content("~/imagenes/productos/" + Model.ImagenUrl)"
+                             class="product-image" />
+                    }
+                    else
+                    {
+                        <div class="empty-image mx-auto">
+
+                            <i class="bi bi-image"></i>
+
+                        </div>
+                    }
+
+                </div>
+
+                <!-- INFORMACION -->
+                <div class="col-md-8">
+
+                    <!-- NOMBRE -->
+                    <div class="info-box">
+
+                        <p class="label-title">
+                            Nombre del Producto
+                        </p>
+
+                        <div class="value-text">
+                            @Model.Nombre
+                        </div>
+
+                    </div>
+
+                    <!-- DESCRIPCION -->
+                    <div class="info-box">
+
+                        <p class="label-title">
+                            Descripción
+                        </p>
+
+                        <div class="text-muted fs-5">
+
+                            @(string.IsNullOrEmpty(Model.Descripcion)
+                                ? "Sin descripción disponible"
+                                : Model.Descripcion)
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!-- PRECIO -->
+                        <div class="col-md-6">
+
+                            <div class="info-box">
+
+                                <p class="label-title">
+                                    Precio
+                                </p>
+
+                                <div class="value-text price">
+
+                                    @((Model.Precio ?? 0).ToString("C"))
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- STOCK -->
+                        <div class="col-md-6">
+
+                            <div class="info-box">
+
+                                <p class="label-title">
+                                    Stock Disponible
+                                </p>
+
+                                <div class="value-text">
+
+                                    @(Model.Stock ?? 0)
+
+                                </div>
+
+                                <div class="mt-2">
+
+                                    @{
+                                        int stock = Model.Stock ?? 0;
+
+                                        if (stock == 0)
+                                        {
+                                            <span class="badge bg-danger stock-badge">
+                                                Agotado
+                                            </span>
+                                        }
+                                        else if (stock <= 5)
+                                        {
+                                            <span class="badge bg-warning text-dark stock-badge">
+                                                Stock Bajo
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-success stock-badge">
+                                                Disponible
+                                            </span>
+                                        }
+                                    }
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- BOTONES -->
+                    <div class="mt-4 d-flex gap-3">
+
+                        <a asp-action="Edit"
+                               asp-route-id="@Model.Id"
+                               class="btn btn-primary rounded-pill px-4 py-2">
+
+                            <i class="bi bi-pencil-square"></i>
+                            Editar
+
+                        </a>
+
+                        <a asp-action="Index"
+                               class="btn btn-secondary rounded-pill px-4 py-2">
+
+                            <i class="bi bi-arrow-left"></i>
+                            Volver
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
