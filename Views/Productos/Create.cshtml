@@ -65,9 +65,12 @@
                     </label>
 
                     <input asp-for="Nombre"
+                           id="nombreProducto"
                            class="form-control"
                            placeholder="Nombre del producto"
                            required />
+
+                    <span id="errorNombre" class="text-danger"></span>
 
                 </div>
 
@@ -93,11 +96,14 @@
                         </label>
 
                         <input asp-for="Precio"
+                               id="precioProducto"
                                type="number"
                                step="0.01"
                                class="form-control"
                                placeholder="0.00"
                                required />
+
+                        <span id="errorPrecio" class="text-danger"></span>
 
                     </div>
 
@@ -108,12 +114,19 @@
                         </label>
 
                         <input asp-for="Stock"
+                               id="stockProducto"
                                type="number"
                                class="form-control"
                                placeholder="0"
                                required />
 
+                        <span id="errorStock" class="text-danger"></span>
+
                     </div>
+
+@section Scripts{
+    <script src="~/js/productos.js"></script>
+}
 
                 </div>
 

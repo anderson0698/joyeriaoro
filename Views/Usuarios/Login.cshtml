@@ -124,11 +124,11 @@
                         </span>
 
                         <input type="email"
+                               id="email"
                                name="email"
                                class="form-control"
                                placeholder="ejemplo@gmail.com"
                                required />
-
                     </div>
 
                 </div>
@@ -147,10 +147,19 @@
                         </span>
 
                         <input type="password"
+                               id="password"
                                name="password"
                                class="form-control"
                                placeholder="Ingrese su contraseña"
                                required />
+
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                id="btnMostrarPassword">
+
+                            <i class="bi bi-eye-fill"></i>
+
+                        </button>
 
                     </div>
 
@@ -188,5 +197,9 @@
         </div>
 
     </div>
+
+@section Scripts{
+    <script src="~/js/login.js"></script>
+}
 
 </div>

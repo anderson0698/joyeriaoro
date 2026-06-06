@@ -61,6 +61,44 @@ namespace Joyeriaoro.Controllers
         }
 
         // =============================
+        // REGISTRAR (GET)
+        // =============================
+        public IActionResult Registrar()
+        {
+            return View();
+        }
+
+        // =============================
+        // REGISTRAR (POST)
+        // =============================
+        [HttpPost]
+        public IActionResult Registrar(Usuario usuario, string password)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(usuario);
+            }
+
+            var existe = _usuarioService.ObtenerPorEmail(usuario.Email);
+
+            if (existe != null)
+            {
+                ModelState.AddModelError("", "Ya existe un usuario con este correo.");
+                return View(usuario);
+            }
+
+            usuario.PasswordHash =
+                BCrypt.Net.BCrypt.HashPassword(password);
+
+            _usuarioService.Registrar(usuario);
+
+            TempData["Success"] =
+                "Usuario registrado correctamente";
+
+            return RedirectToAction("Login");
+        }
+
+        // =============================
         // LOGOUT
         // =============================
         public async Task<IActionResult> Logout()

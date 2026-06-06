@@ -15,6 +15,6 @@
         public string UsuarioEmail { get; set; } = "";
 
         public string StripeSessionId { get; set; } = "";
-        public long Precio { get; internal set; }
+        public decimal Precio { get; set; }
     }
 }

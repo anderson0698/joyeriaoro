@@ -186,7 +186,7 @@
 
                     <div>
                         <p class="text-muted mb-1">Total Productos</p>
-                        <h2 class="fw-bold">@ViewBag.TotalProductos</h2>
+                        <h2 class="fw-bold contador">@ViewBag.TotalProductos</h2>
                     </div>
 
                     <div class="info-icon bg-primary text-white">
@@ -207,7 +207,7 @@
 
                     <div>
                         <p class="text-muted mb-1">Disponibles</p>
-                        <h2 class="fw-bold text-success">@ViewBag.Disponibles</h2>
+                        <h2 class="fw-bold contador text-success">@ViewBag.Disponibles</h2>
                     </div>
 
                     <div class="info-icon bg-success text-white">
@@ -228,7 +228,7 @@
 
                     <div>
                         <p class="text-muted mb-1">Stock Bajo</p>
-                        <h2 class="fw-bold text-warning">@ViewBag.StockBajo</h2>
+                        <h2 class="fw-bold contador text-warning">@ViewBag.StockBajo</h2>
                     </div>
 
                     <div class="info-icon bg-warning text-dark">
@@ -249,7 +249,7 @@
 
                     <div>
                         <p class="text-muted mb-1">Agotados</p>
-                        <h2 class="fw-bold text-danger">@ViewBag.Agotados</h2>
+                        <h2 class="fw-bold contador text-danger">@ViewBag.Agotados</h2>
                     </div>
 
                     <div class="info-icon bg-danger text-white">
@@ -328,12 +328,12 @@
                     Descargar PDF
                 </a>
 
-                <!-- USUARIOS -->
+                <!-- REGISTRAR USUARIO -->
                 <a asp-controller="Usuarios"
-                   asp-action="Index"
+                   asp-action="Registrar"
                    class="btn btn-dark quick-btn">
-                    <i class="bi bi-people-fill"></i>
-                    Usuarios
+                    <i class="bi bi-person-plus-fill"></i>
+                    Registrar Usuario
                 </a>
 
             </div>
