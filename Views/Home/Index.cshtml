@@ -1,0 +1,348 @@
+﻿@model IEnumerable<Joyeriaoro.Models.Producto>
+
+@{
+    ViewData["Title"] = "Joyeria Oro";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+    body {
+        background: #f8fafc;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* =========================
+           NAVBAR
+        ========================== */
+
+    .navbar-custom {
+        background: #111827;
+        padding: 15px 0;
+    }
+
+    .navbar-brand {
+        font-size: 28px;
+        font-weight: 800;
+        color: white !important;
+    }
+
+    .btn-custom {
+        border-radius: 30px;
+        padding: 10px 22px;
+        font-weight: 600;
+    }
+
+    /* =========================
+           HERO
+        ========================== */
+
+    .hero {
+        background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('/imagenes/banner.jpg');
+        background-size: cover;
+        background-position: center;
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 40px;
+    }
+
+        .hero h1 {
+            font-size: 75px;
+            font-weight: 900;
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+    /* =========================
+           PRODUCTOS
+        ========================== */
+
+    .section-title {
+        font-weight: 800;
+        color: #111827;
+    }
+
+    .product-card {
+        border: none;
+        border-radius: 24px;
+        overflow: hidden;
+        transition: .3s;
+        box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        height: 100%;
+    }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+        }
+
+    .product-img {
+        height: 280px;
+        object-fit: cover;
+    }
+
+    .price {
+        color: #198754;
+        font-weight: 800;
+        font-size: 28px;
+    }
+
+    .btn-buy {
+        border-radius: 30px;
+        padding: 10px;
+        font-weight: 700;
+    }
+
+    /* =========================
+           FOOTER
+        ========================== */
+
+    .footer {
+        background: #111827;
+        color: white;
+        padding: 40px 0;
+        margin-top: 80px;
+    }
+
+</style>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="#">
+            💎 Joyeria Oro
+        </a>
+
+        <div class="d-flex gap-2">
+
+            <!-- WHATSAPP -->
+            <a href="https://wa.me/18298526654"
+                   target="_blank"
+                   class="btn btn-success btn-custom">
+
+                <i class="bi bi-whatsapp"></i>
+                WhatsApp
+
+            </a>
+
+            <!-- INSTAGRAM -->
+            <a href="https://www.instagram.com/dupe_perfumdyd?igsh=MTQ3dmt5amtoZmJqcg%3D%3D&utm_source=qr"
+                   target="_blank"
+                   class="btn btn-danger btn-custom">
+
+                <i class="bi bi-instagram"></i>
+                Instagram
+
+            </a>
+
+            <!-- LOGIN -->
+            <a asp-controller="Usuarios"
+                   asp-action="Login"
+                   class="btn btn-light btn-custom">
+
+                <i class="bi bi-box-arrow-in-right"></i>
+                Iniciar Sesión
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div>
+
+        <h1>
+            Joyeria Oro
+        </h1>
+
+        <p>
+            Elegancia • Exclusividad • Calidad Premium
+        </p>
+
+        <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
+
+            <a href="#productos"
+                   class="btn btn-warning btn-lg btn-custom">
+
+                Ver Catálogo
+
+            </a>
+
+            <a href="https://wa.me/18298526654"
+                   target="_blank"
+                   class="btn btn-success btn-lg btn-custom">
+
+                <i class="bi bi-whatsapp"></i>
+                Contactar
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     PRODUCTOS
+========================= -->
+
+<section class="container py-5" id="productos">
+
+    <div class="text-center mb-5">
+
+        <h1 class="section-title">
+            Productos Disponibles
+        </h1>
+
+        <p class="text-muted fs-5">
+            Descubre nuestra colección exclusiva
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+
+                <div class="card product-card">
+
+                    <!-- IMAGEN -->
+                    @if (!string.IsNullOrEmpty(item.ImagenUrl))
+                    {
+                        <img src="@Url.Content("~/imagenes/productos/" + item.ImagenUrl)"
+                             class="card-img-top product-img" />
+                    }
+                    else
+                    {
+                        <img src="https://via.placeholder.com/500x300"
+                             class="card-img-top product-img" />
+                    }
+
+                    <!-- BODY -->
+                    <div class="card-body p-4">
+
+                        <h3 class="fw-bold">
+                            @item.Nombre
+                        </h3>
+
+                        <p class="text-muted">
+
+                            @(string.IsNullOrEmpty(item.Descripcion)
+                                ? "Producto exclusivo disponible."
+                                : item.Descripcion)
+
+                        </p>
+
+                        <div class="price mb-3">
+
+                            @((item.Precio ?? 0).ToString("C"))
+
+                        </div>
+
+                        <!-- BOTONES -->
+                        <div class="d-grid gap-2">
+
+                            <!-- WHATSAPP -->
+                            <a href="https://wa.me/18298526654?text=Hola,%20me%20interesa%20el%20producto:%20@item.Nombre"
+                                   target="_blank"
+                                   class="btn btn-success btn-buy">
+
+                                <i class="bi bi-whatsapp"></i>
+                                Comprar por WhatsApp
+
+                            </a>
+
+                            <!-- INSTAGRAM -->
+                            <a href="https://www.instagram.com/dupe_perfumdyd?igsh=MTQ3dmt5amtoZmJqcg%3D%3D&utm_source=qr"
+                                   target="_blank"
+                                   class="btn btn-dark btn-buy">
+
+                                <i class="bi bi-instagram"></i>
+                                Ver Instagram
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer text-center">
+
+    <div class="container">
+
+        <h3 class="fw-bold">
+            💎 Joyeria Oro
+        </h3>
+
+        <p class="mb-2">
+            Catálogo Premium de Joyas y Accesorios
+        </p>
+
+        <div class="d-flex justify-content-center gap-3 mt-3">
+
+            <a href="https://wa.me/18298526654"
+                   target="_blank"
+                   class="btn btn-success btn-custom">
+
+                <i class="bi bi-whatsapp"></i>
+                WhatsApp
+
+            </a>
+
+            <a href="https://www.instagram.com/dupe_perfumdyd?igsh=MTQ3dmt5amtoZmJqcg%3D%3D&utm_source=qr"
+                   target="_blank"
+                   class="btn btn-danger btn-custom">
+
+                <i class="bi bi-instagram"></i>
+                Instagram
+
+            </a>
+
+        </div>
+
+        <hr class="my-4" />
+
+        <p class="mb-0">
+            © 2026 Joyeria Oro - Todos los derechos reservados
+        </p>
+
+    </div>
+
+</footer>

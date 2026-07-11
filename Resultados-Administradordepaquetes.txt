@@ -1,0 +1,16 @@
+﻿Restaurando paquetes para C:\Users\User\source\repos\Joyeriaoro\Joyeriaoro.csproj...
+  GET https://api.nuget.org/v3-flatcontainer/rotativacore/index.json
+  OK https://api.nuget.org/v3-flatcontainer/rotativacore/index.json 508 ms 
+  GET https://api.nuget.org/v3-flatcontainer/rotativacore/4.1.0/rotativacore.4.1.0.nupkg
+  OK https://api.nuget.org/v3-flatcontainer/rotativacore/4.1.0/rotativacore.4.1.0.nupkg 350 ms 
+Se ha instalado RotativaCore 4.1.0 de https://api.nuget.org/v3/index.json a C:\Users\User\.nuget\packages\rotativacore\4.1.0 con el hash de contenido eVduyQAnMpmqghpGCIKee8qEGj3FXi0bwmZgQo7k+1uYV5dksq5J0JUWKEtEsTkrpkloIO5IvRaZBA6Yu1Xqhw==.
+  CACHE https://api.nuget.org/v3/vulnerabilities/index.json
+  CACHE https://api.nuget.org/v3-vulnerabilities/2026.02.28.05.40.06/vulnerability.base.json
+  CACHE https://api.nuget.org/v3-vulnerabilities/2026.02.28.05.40.06/2026.03.05.23.40.40/vulnerability.update.json
+Instalando el paquete NuGet RotativaCore 4.1.0.
+Escribiendo el archivo de recursos en el disco. Ruta de acceso: C:\Users\User\source\repos\Joyeriaoro\obj\project.assets.json
+'RotativaCore 4.1.0' se instaló correctamente en Joyeriaoro
+La ejecución de acciones de NuGet tardó 1.84 s
+Tiempo transcurrido: 00:00:05.6933014
+========== Finalizado ==========
+

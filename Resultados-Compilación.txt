@@ -1,0 +1,4 @@
+﻿Limpieza iniciada a las 11:46 p. m....
+1>------ Operación Limpiar iniciada: Proyecto: Joyeriaoro, configuración: Debug Any CPU ------
+========== Limpiar: 1 correcto, 0 con errores, 0 omitido ===========
+========== Limpiar completado a las 11:46 p. m. y tardó 01.216 segundos ==========
